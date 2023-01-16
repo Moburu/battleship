@@ -1,8 +1,9 @@
 class Gameboard {
     constructor(size) {
         this.board = []
-        if (size) {
-            this.initialize(size);
+        this.size = size;
+        if (this.size) {
+            this.initialize(this.size);
         } else {
             this.size = 7;
             this.initialize(7);
