@@ -1,25 +1,19 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { BoardGrid, Cell } from '../styled-components/gameStyles.js';
 
 const Board = props => {
+    const cells = [];
+    for (let i = 0; i < 64; i++) {
+        cells.push(i);
+    }
+
     return (
         <BoardGrid>
-            <Cell />
-            <Cell />
-            <Cell />
-            <Cell />
-            <Cell />
-            <Cell />
-            <Cell />
-            <Cell />
-            <Cell />
+            {cells.map(entry =>
+                <Cell />
+            )}
         </BoardGrid>
     )
-}
-
-Board.propTypes = {
-
 }
 
 export default Board
