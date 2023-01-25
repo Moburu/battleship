@@ -18,12 +18,12 @@ class Gameboard {
     placeShip(ship, options) {
         const [x, y] = options.coords;
 
-        if (options.axis === "X") {
+        if (options.axis === "x") {
             for (let i = 0; i < ship.length; i++) {
                 this.board[x+i][y].hasShip = true;
                 this.board[x+i][y].ship = ship;
             }
-        } else if (options.axis === "Y") {
+        } else if (options.axis === "y") {
             for (let i = 0; i < ship.length; i++) {
                 this.board[x][y+i].hasShip = true;
                 this.board[x][y+i].ship = ship;

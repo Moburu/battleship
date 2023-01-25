@@ -23,7 +23,7 @@ const Cell = styled.div`
     border: 2px solid black;
     width: 60px;
     height: 60px;
-    transition: .25s ease-in-out;
+    transition: .25s;
     background-color: ${({ highlighted }) => highlighted ? 'red' : 'white'};
     cursor: ${({ cursor }) => cursor};
 

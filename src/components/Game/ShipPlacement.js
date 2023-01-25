@@ -1,15 +1,82 @@
-import React from 'react'
-import Board from './Board';
+import React, { useState } from 'react'
 import Player from '../../factories/Player';
-import { Button, ShipPlacementContainer } from '../styled-components/gameStyles';
+import { BoardGrid, Button, Cell, ShipPlacementContainer } from '../styled-components/gameStyles';
 
 const ShipPlacement = props => {
     const dummyPlayer = new Player();
+    const board = dummyPlayer.board.board;
+    let axis = 'x';
+    const [highlighted, setHighlighted] = useState([]);
+    const shipSizes = [2, 2, 3, 3, 4, 5];
+    const handleMouseEnter = (board, location) => {
+        const [x, y] = location;
+        const targets = [];
+        if (axis === 'y') {
+            for (let i = 0; i < shipSizes[0]; i++) {
+                // if there is an overflow on the x-axis, do nothing
+                if (typeof board[x+i] === "undefined") {
+                    setHighlighted([]);
+                    return
+                }
+                targets.push(JSON.stringify([x+i, y]));
+            }
+        } else if (axis === 'x') {
+            for (let i = 0; i < shipSizes[0]; i++) {
+                // if there is an overflow on the y-axis, do nothing
+                if (typeof board[x][y+i] === "undefined") {
+                    setHighlighted([]);
+                    return
+                }
+                targets.push(JSON.stringify([x, y+i]));
+            }
+        } else {
+            throw new Error("unexpected axis");
+        }
+        setHighlighted(targets);
+    }
+    const handleMouseLeave = () => {
+        setHighlighted([]);
+    }
+    const handleClick = (board, location, ship) => {
+        board.placeShip()
+    }
+    const handleChangeAxis = () => {
+        if (axis === 'x') {
+            axis = 'y';
+        } else {
+            axis = 'x';
+        }
+    }
     return (
         <ShipPlacementContainer>
             <h1>Place your ships to begin.</h1>
             <p>The "change axis" button will allow you to swap between horizontal and vertical placement.</p>
-            <Board player={dummyPlayer} />
+            <BoardGrid>
+                {board.map((column, x) =>
+                    column.map((entry, y) => {
+                        let location = [x, y];
+                        let jsonLocation = JSON.stringify(location);
+                        return (
+                        <Cell
+                            key={jsonLocation}
+                            highlighted={highlighted.includes(jsonLocation)}
+                            cursor={highlighted.includes(jsonLocation) ? 'pointer' : 'not-allowed'}
+                            onMouseEnter={() => {
+                                handleMouseEnter(board, location);
+                            }}
+                            onMouseLeave={() => {
+                                handleMouseLeave();
+                            }}
+                            onClick={() => {
+                                handleClick();
+                            }}
+                        >
+                            {location.toString()}
+                        </Cell>
+                        )
+                    })
+                )}
+            </BoardGrid>
             <Button>Change Axis</Button>
         </ShipPlacementContainer>
     )
