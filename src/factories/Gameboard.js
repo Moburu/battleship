@@ -1,13 +1,8 @@
 class Gameboard {
-    constructor(size) {
+
+    constructor() {
         this.board = []
-        this.size = size;
-        if (this.size) {
-            this.initialize(this.size);
-        } else {
-            this.size = 7;
-            this.initialize(7);
-        }
+        this.initialize(7)
     }
 
     initialize(size) {
@@ -21,8 +16,7 @@ class Gameboard {
     }
 
     placeShip(ship, options) {
-        const x = options.coords[0];
-        const y = options.coords[1];
+        const [x, y] = options.coords;
 
         if (options.axis === "X") {
             for (let i = 0; i < ship.length; i++) {

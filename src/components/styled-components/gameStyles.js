@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 const BoardGrid = styled.div`
+    border: 2px solid black;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 `
 
 const Button = styled.button`
@@ -22,11 +23,10 @@ const Cell = styled.div`
     border: 2px solid black;
     width: 60px;
     height: 60px;
-    cursor: pointer;
     transition: .25s ease-in-out;
-    &: hover {
-        background-color: red;
-    }
+    background-color: ${({ highlighted }) => highlighted ? 'red' : 'white'};
+    cursor: ${({ cursor }) => cursor};
+
 `
 
 const GameWindowContainer = styled.div`

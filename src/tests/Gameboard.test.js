@@ -2,19 +2,16 @@ import Gameboard from "../factories/Gameboard";
 import Ship from "../factories/Ship";
 
 test('the board initializes properly', () => {
-    const myBoard1 = new Gameboard(2);
-    expect(myBoard1.board).toStrictEqual(
-        [
-            [
-                {hasShip: false, isHit: false, ship: null},
-                {hasShip: false, isHit: false, ship: null}
-            ],
-            [
-                {hasShip: false, isHit: false, ship: null},
-                {hasShip: false, isHit: false, ship: null}
-            ]
-        ]
-    );
+    const myBoard1 = new Gameboard();
+    let dummyBoard = [];
+    for (let i = 0; i < 7; i++) {
+        let dummyColumn = []
+        for (let j = 0; j < 7; j++) {
+            dummyColumn.push({hasShip: false, isHit: false, ship: null});
+        }
+        dummyBoard.push(dummyColumn);
+    }
+    expect(myBoard1.board).toEqual(dummyBoard);
 });
 
 test('you can place a ship at a specific location', () => {
