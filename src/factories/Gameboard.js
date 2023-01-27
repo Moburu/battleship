@@ -3,6 +3,7 @@ class Gameboard {
     constructor() {
         this.board = []
         this.initialize(7)
+        this.size = 7;
     }
 
     initialize(size) {
@@ -17,13 +18,14 @@ class Gameboard {
 
     placeShip(ship, options) {
         const [x, y] = options.coords;
-
-        if (options.axis === "x") {
+        if (options.axis === "X") {
             for (let i = 0; i < ship.length; i++) {
+                // console.log("Among us",options.coords);
                 this.board[x+i][y].hasShip = true;
                 this.board[x+i][y].ship = ship;
+                // console.log(this.board[x+i][y].hasShip);
             }
-        } else if (options.axis === "y") {
+        } else if (options.axis === "Y") {
             for (let i = 0; i < ship.length; i++) {
                 this.board[x][y+i].hasShip = true;
                 this.board[x][y+i].ship = ship;
@@ -32,7 +34,6 @@ class Gameboard {
             console.error("Invalid axis specified!");
             return;
         }
-
     }
 
     receiveAttack(coords) {

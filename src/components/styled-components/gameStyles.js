@@ -20,10 +20,13 @@ const Button = styled.button`
 `
 
 const Cell = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     border: 2px solid black;
     width: 60px;
     height: 60px;
-    transition: .25s;
+    transition: .1s;
     background-color: ${({ highlighted }) => highlighted ? 'red' : 'white'};
     cursor: ${({ cursor }) => cursor};
 

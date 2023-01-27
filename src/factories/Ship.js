@@ -1,6 +1,6 @@
 class Ship {
-    constructor(ship) {
-        this.length = ship.length || 0;
+    constructor(length) {
+        this.length = length || 0;
         this.numHits = 0;
     }
 
