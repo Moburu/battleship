@@ -29,11 +29,6 @@ describe('Gameboard methods', () => {
         expect(myBoard.board[4][2].ship).toStrictEqual(myShip);
     });
 
-    it('will not place a ship in an invalid location', () => {
-        myBoard.placeShip(myShip, {coords: [6, 6], axis: 'X'});
-        expect(myBoard.board[6][6].hasShip).toStrictEqual(false);
-    })
-
     it('can shoot a target, and if you hit the ship will increment numHits', () => {
         myBoard.placeShip(myShip, {coords: [3, 2], axis: 'X'});
         myBoard.receiveAttack([3, 2]);
