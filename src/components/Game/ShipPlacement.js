@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Player from '../../factories/Player';
 import Ship from '../../factories/Ship';
 import { BoardGrid, Button, Cell, ShipPlacementContainer } from '../styled-components/gameStyles';
 
-// const dummyPlayer = new Player();
-// const dummyShip = new Ship(2);
-// const board = dummyPlayer.board.board;
+const dummyPlayer = new Player();
+const dummyShip = new Ship(2);
+const board = dummyPlayer.board.board;
 
 const ShipPlacement = props => {
-    const [dummyPlayer, setDummyPlayer] = useState(new Player());
-    const [dummyShip, setDummyShip] = useState(new Ship(2));
     const [axis, setAxis] = useState('X');
     const [highlighted, setHighlighted] = useState([]);
     const shipSizes = [2, 2, 3, 3, 4, 5];
@@ -58,18 +56,17 @@ const ShipPlacement = props => {
             <h1>Place your ships to begin.</h1>
             <p>The "change axis" button will allow you to swap between horizontal and vertical placement.</p>
             <BoardGrid>
-                {dummyPlayer.board.board.map((column, x) =>
+                {board.map((column, x) =>
                     column.map((entry, y) => {
                         let location = [x, y];
                         let jsonLocation = JSON.stringify(location);
                         return (
                         <Cell
-                            asda={console.log(entry.hasShip)}
                             key={jsonLocation}
                             highlighted={highlighted.includes(jsonLocation)}
                             cursor={highlighted.includes(jsonLocation) ? 'pointer' : 'not-allowed'}
                             onMouseEnter={() => {
-                                handleMouseEnter(dummyPlayer.board.board, location);
+                                handleMouseEnter(board, location);
                             }}
                             onMouseLeave={() => {
                                 handleMouseLeave();

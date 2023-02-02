@@ -1,2 +1,3 @@
 TODO:
-Make the ShipPlacement component able to actually place ships
+Can't place ships where they'd fall off the board
+Ship doesn't show up until you mouse off

@@ -20,15 +20,21 @@ class Gameboard {
         const [x, y] = options.coords;
         if (options.axis === "X") {
             for (let i = 0; i < ship.length; i++) {
-                // console.log("Among us",options.coords);
-                this.board[x+i][y].hasShip = true;
-                this.board[x+i][y].ship = ship;
-                // console.log(this.board[x+i][y].hasShip);
+                try {
+                    this.board[x+i][y].hasShip = true;
+                    this.board[x+i][y].ship = ship;
+                } catch (err) {
+                    console.error(err)
+                }
             }
         } else if (options.axis === "Y") {
             for (let i = 0; i < ship.length; i++) {
-                this.board[x][y+i].hasShip = true;
-                this.board[x][y+i].ship = ship;
+                try {
+                    this.board[x][y+i].hasShip = true;
+                    this.board[x][y+i].ship = ship;
+                } catch (err) {
+                    console.error(err)
+                }
             }
         } else {
             console.error("Invalid axis specified!");
