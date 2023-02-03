@@ -39,7 +39,30 @@ const GameWindowContainer = styled.div`
     align-items: center;
 `
 
-const ShipPlacementContainer = styled.div`
+const NameForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+`
+
+const NameInput = styled.input`
+    margin: 20px;
+    font-size: 24px;
+    font-family: 'Kanit', sans-serif;
+    text-align: center;
+    height: 1.2em;
+`
+
+const NameSubmit = styled.input`
+    width: 150px;
+    font-size: 24px;
+    font-family: 'Kanit', sans-serif;
+    text-align: center;
+
+`
+
+const SetupContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -51,5 +74,8 @@ export {
     Button,
     Cell,
     GameWindowContainer,
-    ShipPlacementContainer,
+    NameForm,
+    NameInput,
+    NameSubmit,
+    SetupContainer,
 }

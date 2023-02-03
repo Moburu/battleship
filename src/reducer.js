@@ -19,6 +19,18 @@ function reducer(state, action) {
                 winner: payload,
             }
         }
+        case 'SET_PLAYER_NAME': {
+            return {
+                ...state,
+                players: {
+                    ...state.players,
+                    human: {
+                        ...state.players.human,
+                        name: payload,
+                    }
+                }
+            }
+        }
         case 'ADD_PLAYER_SHIP': {
             return {
                 ...state,

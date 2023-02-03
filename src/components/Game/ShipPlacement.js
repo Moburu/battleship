@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import Ship from '../../factories/Ship';
-import { BoardGrid, Button, Cell, ShipPlacementContainer } from '../styled-components/gameStyles';
+import { BoardGrid, Button, Cell, SetupContainer } from '../styled-components/gameStyles';
 import { store } from '../../GamestateProvider';
 
 const ships = [new Ship(2), new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)];
@@ -69,7 +69,7 @@ const ShipPlacement = props => {
     }
 
     return (
-        <ShipPlacementContainer>
+        <SetupContainer>
             <h1>Place your ships to begin.</h1>
             <p>The "change axis" button will allow you to swap between horizontal and vertical placement.</p>
             <BoardGrid>
@@ -101,7 +101,7 @@ const ShipPlacement = props => {
             </BoardGrid>
             <p>Current axis: {axis}</p>
             <Button onClick={() => {handleChangeAxis()}}>Change Axis</Button>
-        </ShipPlacementContainer>
+        </SetupContainer>
     )
 }
 
