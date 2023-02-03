@@ -4,6 +4,7 @@ import Ship from "../factories/Ship";
 describe('Gameboard methods', () => {
     let myBoard;
     let myShip;
+    
     beforeEach(() => {
         myBoard = new Gameboard();
         myShip = new Ship(2);

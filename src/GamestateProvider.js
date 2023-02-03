@@ -1,5 +1,6 @@
 import { createContext, useReducer } from 'react';
 import reducer from './reducer';
+import Player from './factories/Player';
 
 const store = createContext();
 const { Provider } = store;
@@ -7,7 +8,7 @@ const { Provider } = store;
 function GamestateProvider({ children }) {
     const initialState = {
         timeline: 'init',
-        players: {},
+        players: {human: new Player(), cpu: new Player()},
         winner: ''
     }
     const [state, dispatch] = useReducer(reducer, initialState);
