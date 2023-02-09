@@ -21,15 +21,17 @@ class Gameboard {
         let targets = [];
         if (options.axis === "Y") {
             for (let i = 0; i < ship.length; i++) {
-                if (typeof this.board[x+i] === "undefined") {
-                    return;
+                if ((typeof this.board[x+i] === "undefined")
+                    || (this.board[x+i][y].hasShip === true)) {
+                    return false;
                 }
                 targets.push([x+i, y]);
             }
         } else if (options.axis === "X") {
             for (let i = 0; i < ship.length; i++) {
-                if (typeof this.board[x][y+i] === "undefined") {
-                    return;
+                if ((typeof this.board[x][y+i] === "undefined")
+                    || (this.board[x][y+i].hasShip === true)) {
+                    return false;
                 }
                     targets.push([x, y+i]);
             }
@@ -41,6 +43,7 @@ class Gameboard {
             this.board[targets[i][0]][targets[i][1]].hasShip = true;
             this.board[targets[i][0]][targets[i][1]].ship = ship;
         }
+        return true;
     }
 
     receiveAttack(coords) {

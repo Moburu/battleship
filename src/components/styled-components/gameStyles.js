@@ -27,7 +27,7 @@ const Cell = styled.div`
     width: 60px;
     height: 60px;
     transition: .1s;
-    background-color: ${({ highlighted }) => highlighted ? 'red' : 'white'};
+    background-color: ${({ highlighted, hasShip }) => highlighted ? 'red' : hasShip ? 'blue' : 'white'};
     cursor: ${({ cursor }) => cursor};
 
 `

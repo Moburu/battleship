@@ -1,5 +1,4 @@
 import Player from "../factories/Player";
-import Gameboard from "../factories/Gameboard";
 
 describe('Player methods', () => {
     let myPlayer;
@@ -7,7 +6,7 @@ describe('Player methods', () => {
 
     beforeEach(() => {
         myPlayer = new Player();
-        myBoard = new Gameboard();
+        myBoard = myPlayer.board;
     });
 
     it("is assigned a name", () => {
@@ -16,7 +15,7 @@ describe('Player methods', () => {
 
     it("can attack a square on a gameboard", () => {
         myPlayer.fireShot(myBoard, [3, 2]);
-        expect(myBoard.board[3][2].missed).toStrictEqual(true);
+        expect(myBoard[3][2].missed).toStrictEqual(true);
     });
 
     it("knows when it tries to target a tile that has been shot at", () => {

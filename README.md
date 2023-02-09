@@ -1,7 +1,10 @@
 TODO:
-Ship doesn't show up until you mouse off
-Need loop to actually place player ships
-Name selection
+- Add better visual indicator for where ships are
+- Add computer ship placement loop
+- Display both players' ships in the actual game component
+Low priority:
+- In ShipPlacement, a newly placed ship doesn't show up until you mouse off the tile
+- Consider whether I want to allow the player to place ships directly next to other ships
 
 X-Y BUG
 Bug description: When axis="X', we get behaviour as if axis="Y" (the highlighted tiles are below the hovered tile) and vice-versa.

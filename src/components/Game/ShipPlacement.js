@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import Ship from '../../factories/Ship';
 import { BoardGrid, Button, Cell, SetupContainer } from '../styled-components/gameStyles';
+import { checkCollisions } from '../../helperFunctions';
 import { store } from '../../GamestateProvider';
 
 const ships = [new Ship(2), new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)];
@@ -9,32 +10,23 @@ let index = 0
 const ShipPlacement = props => {
     const { state, dispatch } = useContext(store);
     const player = state.players.human;
-    const board = player.board.board;
+    const board = player.board;
     const [axis, setAxis] = useState('X');
     const [highlighted, setHighlighted] = useState([]);
 
     const handleMouseEnter = (board, location) => {
         const [x, y] = location;
         const targets = [];
-        if (typeof ships[index] === 'undefined') {
+        if ((typeof ships[index] === 'undefined') || !checkCollisions(board, location, ships[index].length, axis)) {
+            setHighlighted([]);
             return
         }
         if (axis === 'Y') {
             for (let i = 0; i < ships[index].length; i++) {
-                // if there is an overflow on the x-axis, do nothing
-                if (typeof board[x+i] === "undefined") {
-                    setHighlighted([]);
-                    return
-                }
                 targets.push(JSON.stringify([x+i, y]));
             }
         } else if (axis === 'X') {
             for (let i = 0; i < ships[index].length; i++) {
-                // if there is an overflow on the y-axis, do nothing
-                if (typeof board[x][y+i] === "undefined") {
-                    setHighlighted([]);
-                    return
-                }
                 targets.push(JSON.stringify([x, y+i]));
             }
         } else {
@@ -51,13 +43,14 @@ const ShipPlacement = props => {
         if (typeof ships[index] === 'undefined') {
             return
         }
-            board.placeShip(ship, {coords: location, axis: axis});
+        if (board.placeShip(ship, {coords: location, axis: axis})){
             dispatch({type: 'ADD_PLAYER_SHIP', payload: [...player.ships, ship]});
             index = index + 1;
-            // 6 is one greater than the length of ships
-            if (index === 6) {
-                dispatch({type: 'SET_TIMELINE', payload: 'game'});
-            }
+        }
+        // 6 is one greater than the length of ships
+        if (index === 6) {
+            dispatch({type: 'SET_TIMELINE', payload: 'game'});
+        }
     }
 
     const handleChangeAxis = () => {
@@ -82,6 +75,7 @@ const ShipPlacement = props => {
                             key={jsonLocation}
                             highlighted={highlighted.includes(jsonLocation)}
                             cursor={highlighted.includes(jsonLocation) ? 'pointer' : 'not-allowed'}
+                            hasShip={entry.hasShip}
                             onMouseEnter={() => {
                                 handleMouseEnter(board, location);
                             }}
@@ -89,11 +83,9 @@ const ShipPlacement = props => {
                                 handleMouseLeave();
                             }}
                             onClick={() => {
-                                handleClick(player.board, location, ships[index]);
+                                handleClick(player.gameboard, location, ships[index]);
                             }}
                         >
-                            {location.toString()}
-                            {entry.hasShip ? <span>X</span> : <span>O</span>}
                         </Cell>
                         )
                     })

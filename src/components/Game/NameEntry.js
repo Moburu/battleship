@@ -9,8 +9,10 @@ const NameEntry = props => {
     const handleSubmit = e => {
         e.preventDefault();
         const name = e.target.children[0].value;
-        dispatch({type: 'SET_PLAYER_NAME', payload: name});
-        dispatch({type: 'SET_TIMELINE', payload: 'placement'});
+        if (name !== "") {
+            dispatch({type: 'SET_PLAYER_NAME', payload: name});
+             dispatch({type: 'SET_TIMELINE', payload: 'placement'});
+        }
     }
 
     const handleChange = e => {
