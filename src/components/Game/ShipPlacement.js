@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Ship from '../../factories/Ship';
 import { BoardGrid, Button, Cell, SetupContainer } from '../styled-components/gameStyles';
-import { checkCollisions } from '../../helperFunctions';
+import { checkCollisions, placeCpuShips } from '../../helperFunctions';
 import { store } from '../../GamestateProvider';
 
 const ships = [new Ship(2), new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)];
@@ -11,8 +11,12 @@ const ShipPlacement = props => {
     const { state, dispatch } = useContext(store);
     const player = state.players.human;
     const board = player.board;
+    const cpuGameboard = state.players.cpu.gameboard;
     const [axis, setAxis] = useState('X');
     const [highlighted, setHighlighted] = useState([]);
+    useEffect(() => {
+        placeCpuShips(cpuGameboard, ships)
+    }, [])
 
     const handleMouseEnter = (board, location) => {
         const [x, y] = location;
@@ -85,6 +89,23 @@ const ShipPlacement = props => {
                             onClick={() => {
                                 handleClick(player.gameboard, location, ships[index]);
                             }}
+                        >
+                        </Cell>
+                        )
+                    })
+                )}
+            </BoardGrid>
+            <BoardGrid>
+                {cpuGameboard.board.map((column, x) =>
+                    column.map((entry, y) => {
+                        let location = [x, y];
+                        let jsonLocation = JSON.stringify(location);
+                        return (
+                        <Cell
+                            key={jsonLocation}
+                            highlighted={highlighted.includes(jsonLocation)}
+                            cursor={highlighted.includes(jsonLocation) ? 'pointer' : 'not-allowed'}
+                            hasShip={entry.hasShip}
                         >
                         </Cell>
                         )

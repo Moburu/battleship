@@ -31,7 +31,7 @@ function reducer(state, action) {
                 }
             }
         }
-        case 'ADD_PLAYER_SHIP': {
+        case 'ADD_PLAYER_SHIPS': {
             return {
                 ...state,
                 players: {
@@ -41,6 +41,18 @@ function reducer(state, action) {
                         ships: payload,
                     }
 
+                }
+            }
+        }
+        case 'SET_CPU_SHIPS': {
+            return {
+                ...state,
+                players: {
+                    ...state.players,
+                    cpu: {
+                        ...state.players.cpu,
+                        ships: payload,
+                    }
                 }
             }
         }
