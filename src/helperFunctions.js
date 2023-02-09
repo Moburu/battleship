@@ -26,13 +26,37 @@ const findSuitableLocations = (board, shipLength, axis) => {
     let suitableLocations = [];
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[i].length; j++) {
+            if (!checkCollisions(board, [i, j], shipLength, axis)) {
+                suitableLocations.push([i, j]);
+            }
         }
     }
+    return suitableLocations
 }
 
-const placeCpuShips = (board, shipArray) => {
-    for (let i = 0; i < shipArray.length; i++) {
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
+const randomShipLocation = (board, shipLength) => {
+    let axis;
+    if (getRandomInt(0, 1) === 0) {
+        axis = "X";
+    } else {
+        axis = "Y";
+    }
+    const suitableLocations = findSuitableLocations(board, shipLength, axis);
+    // generates a random int between 0 and the length of suitableLocations, and stores the location at that index
+    const randomLocation = suitableLocations[getRandomInt(0, suitableLocations.length)];
+
+}
+
+const placeCpuShips = (gameboard, shipArray) => {
+    const board = gameboard.board;
+    for (let i = 0; i < shipArray.length; i++) {
+        
     }
 }
 
