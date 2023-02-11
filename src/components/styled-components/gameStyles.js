@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const BoardGrid = styled.div`
     border: 2px solid black;
+    margin: 10px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -19,7 +20,7 @@ const Button = styled.button`
     cursor: pointer;
 `
 
-const Cell = styled.div`
+const EnemyCell = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -27,12 +28,23 @@ const Cell = styled.div`
     width: 60px;
     height: 60px;
     transition: .1s;
-    background-color: ${({ highlighted, hasShip }) => highlighted ? 'red' : hasShip ? 'blue' : 'white'};
+    background-color: ${({ highlighted, isHit, missed }) => isHit ? 'red' : missed ? 'green' : highlighted ? 'yellow' : 'white'};
     cursor: ${({ cursor }) => cursor};
-
 `
 
-const GameWindowContainer = styled.div`
+const FriendlyCell = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 2px solid black;
+    width: 60px;
+    height: 60px;
+    transition: .1s;
+    background-color: ${({ highlighted, hasShip, isHit, missed }) => isHit ? 'red' : missed ? 'green' : highlighted ? 'yellow' : hasShip ? 'blue' : 'white'};
+    cursor: ${({ cursor }) => cursor};
+`
+
+const HorizontalContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -62,7 +74,7 @@ const NameSubmit = styled.input`
 
 `
 
-const SetupContainer = styled.div`
+const VerticalContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -72,10 +84,11 @@ const SetupContainer = styled.div`
 export {
     BoardGrid,
     Button,
-    Cell,
-    GameWindowContainer,
+    EnemyCell,
+    FriendlyCell,
+    HorizontalContainer,
     NameForm,
     NameInput,
     NameSubmit,
-    SetupContainer,
+    VerticalContainer,
 }

@@ -15,7 +15,7 @@ describe('Gameboard methods', () => {
         for (let i = 0; i < 7; i++) {
             let dummyColumn = []
             for (let j = 0; j < 7; j++) {
-                dummyColumn.push({hasShip: false, isHit: false, ship: null});
+                dummyColumn.push({hasShip: false, isHit: false, missed: false, ship: null});
             }
             dummyBoard.push(dummyColumn);
         }

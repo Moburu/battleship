@@ -1,4 +1,5 @@
 import Gameboard from "./Gameboard";
+import { getRandomInt } from "../helperFunctions";
 
 class Player {
     constructor(name) {
@@ -8,27 +9,26 @@ class Player {
         this.board = this.gameboard.board;
     }
 
-    fireShot(board, coords) {
-        if ((!this.board[coords[0]][coords[1]].missed) &&
-        (!this.board[coords[0]][coords[1]].isHit)) {
-            this.gameboard.receiveAttack(coords);
-            this.gameboard.receiveAttack(coords);
+    fireShot (gameboard, coords) {
+        if ((!gameboard.board[coords[0]][coords[1]].missed) &&
+        (!gameboard.board[coords[0]][coords[1]].isHit)) {
+            gameboard.receiveAttack(coords);
             return "Fired"
         } else {
             return "That tile has already been hit!"
         }
     }
 
-    fireRandomShot(board) {
-        const randomX = Math.floor(this.board.length*Math.random());
-        const randomY = Math.floor(this.board.length*Math.random());
+    fireRandomShot(gameboard) {
+        const randomX = getRandomInt(0, gameboard.size);
+        const randomY = getRandomInt(0, gameboard.size);
         const coords = [randomX, randomY];
-        if ((!this.board[coords[0]][coords[1]].missed) &&
-        (!this.board[coords[0]][coords[1]].isHit)) {
-            this.gameboard.receiveAttack(coords);
+        if ((!gameboard.board[randomX][randomY].missed) &&
+        (!gameboard.board[randomX][randomY].isHit)) {
+            gameboard.receiveAttack(coords);
             return "Fired"
         } else {
-            return "That tile has already been hit!"
+            this.fireRandomShot(gameboard);
         }
     }
 }

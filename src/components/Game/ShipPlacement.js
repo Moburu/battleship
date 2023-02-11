@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import Ship from '../../factories/Ship';
-import { BoardGrid, Button, Cell, SetupContainer } from '../styled-components/gameStyles';
+import { BoardGrid, Button, FriendlyCell, VerticalContainer } from '../styled-components/gameStyles';
 import { checkCollisions, placeCpuShips } from '../../helperFunctions';
 import { store } from '../../GamestateProvider';
 
@@ -9,9 +9,9 @@ let index = 0
 
 const ShipPlacement = props => {
     const { state, dispatch } = useContext(store);
-    const player = state.players.human;
+    const player = state.players[0];
     const board = player.board;
-    const cpuGameboard = state.players.cpu.gameboard;
+    const cpuGameboard = state.players[1].gameboard;
     const [axis, setAxis] = useState('X');
     const [highlighted, setHighlighted] = useState([]);
     useEffect(() => {
@@ -66,7 +66,7 @@ const ShipPlacement = props => {
     }
 
     return (
-        <SetupContainer>
+        <VerticalContainer>
             <h1>Place your ships to begin.</h1>
             <p>The "change axis" button will allow you to swap between horizontal and vertical placement.</p>
             <BoardGrid>
@@ -75,7 +75,7 @@ const ShipPlacement = props => {
                         let location = [x, y];
                         let jsonLocation = JSON.stringify(location);
                         return (
-                        <Cell
+                        <FriendlyCell
                             key={jsonLocation}
                             highlighted={highlighted.includes(jsonLocation)}
                             cursor={highlighted.includes(jsonLocation) ? 'pointer' : 'not-allowed'}
@@ -90,31 +90,14 @@ const ShipPlacement = props => {
                                 handleClick(player.gameboard, location, ships[index]);
                             }}
                         >
-                        </Cell>
-                        )
-                    })
-                )}
-            </BoardGrid>
-            <BoardGrid>
-                {cpuGameboard.board.map((column, x) =>
-                    column.map((entry, y) => {
-                        let location = [x, y];
-                        let jsonLocation = JSON.stringify(location);
-                        return (
-                        <Cell
-                            key={jsonLocation}
-                            highlighted={highlighted.includes(jsonLocation)}
-                            cursor={highlighted.includes(jsonLocation) ? 'pointer' : 'not-allowed'}
-                            hasShip={entry.hasShip}
-                        >
-                        </Cell>
+                        </FriendlyCell>
                         )
                     })
                 )}
             </BoardGrid>
             <p>Current axis: {axis}</p>
             <Button onClick={() => {handleChangeAxis()}}>Change Axis</Button>
-        </SetupContainer>
+        </VerticalContainer>
     )
 }
 

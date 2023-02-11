@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { NameForm, NameInput, NameSubmit, SetupContainer } from '../styled-components/gameStyles'
+import { NameForm, NameInput, NameSubmit, VerticalContainer } from '../styled-components/gameStyles'
 import { store } from '../../GamestateProvider'
 
 const NameEntry = props => {
@@ -21,7 +21,7 @@ const NameEntry = props => {
     }
 
     return (
-    <SetupContainer>
+    <VerticalContainer>
         <h1>Enter your name:</h1>
         <NameForm onSubmit={handleSubmit}>
             <NameInput
@@ -30,7 +30,7 @@ const NameEntry = props => {
             />
             <NameSubmit type="submit" />
         </NameForm>
-    </SetupContainer>
+    </VerticalContainer>
     )
 }
 export default NameEntry

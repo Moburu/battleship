@@ -35,7 +35,7 @@ const findSuitableLocations = (board, shipLength, axis) => {
 }
 
 // min inclusive, max exclusive
-function getRandomInt(min, max) {
+const getRandomInt = (min, max) => {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
@@ -59,7 +59,6 @@ const placeCpuShips = (gameboard, shipArray) => {
     let randomLocation;
     let randomAxis;
     let shipLength;
-    console.log(shipArray.length)
     for (let i = 0; i < shipArray.length; i++) {
         shipLength = shipArray[i].length;
         [randomLocation, randomAxis] = randomShipLocation(board, shipLength);
@@ -70,5 +69,6 @@ const placeCpuShips = (gameboard, shipArray) => {
 export {
     checkCollisions,
     findSuitableLocations,
+    getRandomInt,
     placeCpuShips,
 }

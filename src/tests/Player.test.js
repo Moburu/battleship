@@ -2,10 +2,12 @@ import Player from "../factories/Player";
 
 describe('Player methods', () => {
     let myPlayer;
+    let myGameboard;
     let myBoard;
 
     beforeEach(() => {
         myPlayer = new Player();
+        myGameboard = myPlayer.gameboard;
         myBoard = myPlayer.board;
     });
 
@@ -14,12 +16,12 @@ describe('Player methods', () => {
     });
 
     it("can attack a square on a gameboard", () => {
-        myPlayer.fireShot(myBoard, [3, 2]);
+        myPlayer.fireShot(myGameboard, [3, 2]);
         expect(myBoard[3][2].missed).toStrictEqual(true);
     });
 
     it("knows when it tries to target a tile that has been shot at", () => {
-        expect(myPlayer.fireShot(myBoard, [3, 2])).toStrictEqual("Fired");
-        expect(myPlayer.fireShot(myBoard, [3, 2])).toStrictEqual("That tile has already been hit!");
+        expect(myPlayer.fireShot(myGameboard, [3, 2])).toStrictEqual("Fired");
+        expect(myPlayer.fireShot(myGameboard, [3, 2])).toStrictEqual("That tile has already been hit!");
     })
 })

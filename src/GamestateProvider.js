@@ -8,7 +8,7 @@ const { Provider } = store;
 function GamestateProvider({ children }) {
     const initialState = {
         timeline: 'init',
-        players: {human: new Player(), cpu: new Player()},
+        players: [new Player(), new Player("Computer")],
         winner: ''
     }
     const [state, dispatch] = useReducer(reducer, initialState);

@@ -10,7 +10,7 @@ class Gameboard {
         for (let i = 0; i < size; i++) {
             let column = []
             for (let j = 0; j < size; j++) {
-                column.push({hasShip: false, isHit: false, ship: null});
+                column.push({hasShip: false, isHit: false, missed: false, ship: null});
             }
             this.board.push(column);
         }
@@ -58,9 +58,9 @@ class Gameboard {
     }
 
     isLost() {
-        for (let i = 0; i < this.length; i++) {
-            for (let j = 0; j < this.length; j++) {
-                if (!this.board[i][j].ship.isSunk()) {
+        for (let i = 0; i < this.size; i++) {
+            for (let j = 0; j < this.size; j++) {
+                if ((this.board[i][j].hasShip) && (!this.board[i][j].ship.isSunk())) {
                     return false;
                 }
             }
