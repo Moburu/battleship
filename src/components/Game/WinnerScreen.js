@@ -1,10 +1,9 @@
 import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { store } from '../../GamestateProvider'
 import { VerticalContainer } from '../styled-components/gameStyles';
 
 const WinnerScreen = props => {
-    const { state, dispatch } = useContext(store);
+    const { state } = useContext(store);
     const winner = state.winner;
     return (
         <VerticalContainer>
@@ -20,7 +19,5 @@ const WinnerScreen = props => {
         </VerticalContainer>
     )
 }
-
-WinnerScreen.propTypes = {}
 
 export default WinnerScreen

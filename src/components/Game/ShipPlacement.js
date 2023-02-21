@@ -9,14 +9,17 @@ let index = 0
 
 const ShipPlacement = props => {
     const { state, dispatch } = useContext(store);
+
     const player = state.players[0];
     const board = player.board;
     const cpuGameboard = state.players[1].gameboard;
+
     const [axis, setAxis] = useState('X');
     const [highlighted, setHighlighted] = useState([]);
+
     useEffect(() => {
         placeCpuShips(cpuGameboard, ships)
-    }, [])
+    }, [cpuGameboard])
 
     const handleMouseEnter = (board, location) => {
         const [x, y] = location;

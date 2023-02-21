@@ -7,7 +7,7 @@ import { HorizontalContainer } from '../styled-components/gameStyles';
 import { store } from '../../GamestateProvider';
 
 const GameWindow = props => {
-  const { state, dispatch } = useContext(store);
+  const { state } = useContext(store);
   const timeline = state.timeline;
 
   return (

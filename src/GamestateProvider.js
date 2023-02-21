@@ -15,5 +15,5 @@ function GamestateProvider({ children }) {
     return <Provider value={{state, dispatch}}>{children}</Provider>;
 }
 
-export default GamestateProvider;
-export { store };
+export default GamestateProvider
+export { store }
