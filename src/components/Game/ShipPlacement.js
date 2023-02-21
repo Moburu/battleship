@@ -4,7 +4,8 @@ import { BoardGrid, Button, FriendlyCell, VerticalContainer } from '../styled-co
 import { checkCollisions, placeCpuShips } from '../../helperFunctions';
 import { store } from '../../GamestateProvider';
 
-const ships = [new Ship(2), new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)];
+const humanShips = [new Ship(2), new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)];
+const cpuShips = [new Ship(2), new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)];
 let index = 0
 
 const ShipPlacement = props => {
@@ -18,22 +19,22 @@ const ShipPlacement = props => {
     const [highlighted, setHighlighted] = useState([]);
 
     useEffect(() => {
-        placeCpuShips(cpuGameboard, ships)
+        placeCpuShips(cpuGameboard, cpuShips)
     }, [cpuGameboard])
 
     const handleMouseEnter = (board, location) => {
         const [x, y] = location;
         const targets = [];
-        if ((typeof ships[index] === 'undefined') || !checkCollisions(board, location, ships[index].length, axis)) {
+        if ((typeof humanShips[index] === 'undefined') || !checkCollisions(board, location, humanShips[index].length, axis)) {
             setHighlighted([]);
             return
         }
         if (axis === 'Y') {
-            for (let i = 0; i < ships[index].length; i++) {
+            for (let i = 0; i < humanShips[index].length; i++) {
                 targets.push(JSON.stringify([x+i, y]));
             }
         } else if (axis === 'X') {
-            for (let i = 0; i < ships[index].length; i++) {
+            for (let i = 0; i < humanShips[index].length; i++) {
                 targets.push(JSON.stringify([x, y+i]));
             }
         } else {
@@ -47,7 +48,7 @@ const ShipPlacement = props => {
     }
 
     const handleClick = (board, location, ship) => {
-        if (typeof ships[index] === 'undefined') {
+        if (typeof humanShips[index] === 'undefined') {
             return
         }
         if (board.placeShip(ship, {coords: location, axis: axis})){
@@ -90,7 +91,7 @@ const ShipPlacement = props => {
                                 handleMouseLeave();
                             }}
                             onClick={() => {
-                                handleClick(player.gameboard, location, ships[index]);
+                                handleClick(player.gameboard, location, humanShips[index]);
                             }}
                         >
                         </FriendlyCell>

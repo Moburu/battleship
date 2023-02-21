@@ -42,7 +42,12 @@ describe('Gameboard methods', () => {
         expect(myBoard.board[3][2].missed).toStrictEqual(true);
     })
 
-    it('will tell you if all its ships have sunk', () => {
+    it('will tell you if it has not yet lost the game', () => {
+        myBoard.placeShip(myShip, {coords: [3, 2], axis: 'X'});
+        expect(myBoard.isLost()).toStrictEqual(false);
+    })
+
+    it('will tell you if it has lost the game', () => {
         myBoard.placeShip(myShip, {coords: [3, 2], axis: 'X'});
         myBoard.receiveAttack([3, 2]);
         myBoard.receiveAttack([3, 3]);

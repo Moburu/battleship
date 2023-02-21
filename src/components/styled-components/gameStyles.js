@@ -44,13 +44,6 @@ const FriendlyCell = styled.div`
     cursor: ${({ cursor }) => cursor};
 `
 
-const HorizontalContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-`
-
 const NameForm = styled.form`
     display: flex;
     flex-direction: column;
@@ -71,7 +64,16 @@ const NameSubmit = styled.input`
     font-size: 24px;
     font-family: 'Kanit', sans-serif;
     text-align: center;
+`
 
+const ResponsiveContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    @media (max-width: 950px) {
+        flex-direction: column;
+    }
 `
 
 const VerticalContainer = styled.div`
@@ -86,9 +88,9 @@ export {
     Button,
     EnemyCell,
     FriendlyCell,
-    HorizontalContainer,
     NameForm,
     NameInput,
     NameSubmit,
+    ResponsiveContainer,
     VerticalContainer,
 }
