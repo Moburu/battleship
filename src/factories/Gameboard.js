@@ -12,7 +12,7 @@ class Gameboard {
             for (let j = 0; j < size; j++) {
                 column.push({hasShip: false, isHit: false, missed: false, ship: null});
             }
-            this.board.push(column);
+            this.board[i] = column;
         }
     }
 

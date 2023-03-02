@@ -3,7 +3,7 @@ import { NameForm, NameInput, NameSubmit, VerticalContainer } from '../styled-co
 import { store } from '../../GamestateProvider'
 
 const NameEntry = props => {
-    const { state, dispatch } = useContext(store);
+    const { dispatch } = useContext(store);
     const [input, setInput] = useState("");
 
     const handleSubmit = e => {
@@ -11,7 +11,7 @@ const NameEntry = props => {
         const name = e.target.children[0].value;
         if (name !== "") {
             dispatch({type: 'SET_PLAYER_NAME', payload: name});
-             dispatch({type: 'SET_TIMELINE', payload: 'placement'});
+            dispatch({type: 'SET_TIMELINE', payload: 'placement'});
         }
     }
 

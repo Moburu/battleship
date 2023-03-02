@@ -40,8 +40,16 @@ const FriendlyCell = styled.div`
     width: 60px;
     height: 60px;
     transition: .1s;
-    background-color: ${({ highlighted, hasShip, isHit, missed }) => isHit ? 'red' : missed ? 'green' : highlighted ? 'yellow' : hasShip ? 'blue' : 'white'};
+    background-color: ${({ highlighted, hasShip, isHit, missed }) => isHit ? 'red' : missed ? 'green' : highlighted ? 'rgb(255, 128, 128, 0.5)' : hasShip ? 'blue' : 'white'};
     cursor: ${({ cursor }) => cursor};
+`
+
+const GameTitle = styled.h1`
+    text-align: center;
+`
+
+const GameText = styled.p`
+    text-align: center;
 `
 
 const NameForm = styled.form`
@@ -88,6 +96,8 @@ export {
     Button,
     EnemyCell,
     FriendlyCell,
+    GameTitle,
+    GameText,
     NameForm,
     NameInput,
     NameSubmit,

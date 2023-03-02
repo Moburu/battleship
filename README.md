@@ -1,6 +1,9 @@
 TODO:
+- Transitions between game componenets
+- "About" section, navigation
 - Improve CSS including responsive design
 - Maybe add time delay for cpu shots
+- Sound effects!
 - Maybe add stat display for winner screen? Can make a helper function getGameStats() that will return an object full of different stats derived from the human and cpu boards such as shot accuracy
 
 Low priority:
@@ -28,3 +31,9 @@ For some reason the name of the winner was displaying improperly. I console.logg
 ... they're the same ships!!!!
 
 The solution ended up being that I was populating the cpu board with the same ship instances as the human board. So when I hit a ship on one board, I also hit it on the other one. I fixed this by making two different arrays of ships, one for each player.
+
+Things I practiced with this project:
+1. Test-driven development
+2. Rapid prototyping
+3. Using styled-components, keeping my styles organized in a separate folder and importing them when needed
+4. Modularizing functions, having factories for different classes I can use and reuse as needed as well as keeping a separate "helper functions" file to share between components whenever needed.

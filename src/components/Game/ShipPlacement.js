@@ -1,40 +1,35 @@
 import React, { useState, useContext, useEffect } from 'react'
-import Ship from '../../factories/Ship';
-import { BoardGrid, Button, FriendlyCell, VerticalContainer } from '../styled-components/gameStyles';
+import { BoardGrid, Button, FriendlyCell, GameTitle, GameText, VerticalContainer } from '../styled-components/gameStyles';
 import { checkCollisions, placeCpuShips } from '../../helperFunctions';
 import { store } from '../../GamestateProvider';
 
-const humanShips = [new Ship(2), new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)];
-const cpuShips = [new Ship(2), new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)];
-let index = 0
-
 const ShipPlacement = props => {
     const { state, dispatch } = useContext(store);
-
-    const player = state.players[0];
-    const board = player.board;
-    const cpuGameboard = state.players[1].gameboard;
+    const { shipIndex, humanShips, cpuShips, players } = state;
+    const human = players[0];
+    const { board } = human;
+    const cpuGameboard = players[1].gameboard;
 
     const [axis, setAxis] = useState('X');
     const [highlighted, setHighlighted] = useState([]);
 
     useEffect(() => {
         placeCpuShips(cpuGameboard, cpuShips)
-    }, [cpuGameboard])
+    }, [cpuGameboard, cpuShips])
 
     const handleMouseEnter = (board, location) => {
         const [x, y] = location;
         const targets = [];
-        if ((typeof humanShips[index] === 'undefined') || !checkCollisions(board, location, humanShips[index].length, axis)) {
+        if ((typeof humanShips[shipIndex] === 'undefined') || !checkCollisions(board, location, humanShips[shipIndex].length, axis)) {
             setHighlighted([]);
             return
         }
         if (axis === 'Y') {
-            for (let i = 0; i < humanShips[index].length; i++) {
+            for (let i = 0; i < humanShips[shipIndex].length; i++) {
                 targets.push(JSON.stringify([x+i, y]));
             }
         } else if (axis === 'X') {
-            for (let i = 0; i < humanShips[index].length; i++) {
+            for (let i = 0; i < humanShips[shipIndex].length; i++) {
                 targets.push(JSON.stringify([x, y+i]));
             }
         } else {
@@ -48,15 +43,15 @@ const ShipPlacement = props => {
     }
 
     const handleClick = (board, location, ship) => {
-        if (typeof humanShips[index] === 'undefined') {
+        if (typeof humanShips[shipIndex] === 'undefined') {
             return
         }
         if (board.placeShip(ship, {coords: location, axis: axis})){
-            dispatch({type: 'ADD_PLAYER_SHIP', payload: [...player.ships, ship]});
-            index = index + 1;
+            dispatch({type: 'ADD_PLAYER_SHIP', payload: [...human.ships, ship]});
+            dispatch({type: 'SET_INDEX', payload: shipIndex+1});
         }
         // 6 is one greater than the length of ships
-        if (index === 6) {
+        if (shipIndex === 5) {
             dispatch({type: 'SET_TIMELINE', payload: 'game'});
         }
     }
@@ -71,8 +66,8 @@ const ShipPlacement = props => {
 
     return (
         <VerticalContainer>
-            <h1>Place your ships to begin.</h1>
-            <p>The "change axis" button will allow you to swap between horizontal and vertical placement.</p>
+            <GameTitle>Place your ships to begin.</GameTitle>
+            <GameText>The "change axis" button will allow you to swap between horizontal and vertical placement.</GameText>
             <BoardGrid>
                 {board.map((column, x) =>
                     column.map((entry, y) => {
@@ -91,7 +86,7 @@ const ShipPlacement = props => {
                                 handleMouseLeave();
                             }}
                             onClick={() => {
-                                handleClick(player.gameboard, location, humanShips[index]);
+                                handleClick(human.gameboard, location, humanShips[shipIndex]);
                             }}
                         >
                         </FriendlyCell>

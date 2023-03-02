@@ -1,3 +1,6 @@
+import Player from './factories/Player';
+import Ship from './factories/Ship';
+
 function reducer(state, action) {
     const { type, payload } = action;
     switch (type) {
@@ -17,6 +20,12 @@ function reducer(state, action) {
             return {
                 ...state,
                 winner: payload,
+            }
+        }
+        case 'SET_INDEX': {
+            return {
+                ...state,
+                shipIndex: payload,
             }
         }
         case 'SET_PLAYER_NAME': {
@@ -54,6 +63,17 @@ function reducer(state, action) {
                         ships: payload,
                     }
                 }
+            }
+        }
+        case 'RESET_GAME': {
+            return {
+                ...state,
+                players: [new Player(), new Player()],
+                humanShips: [new Ship(2), new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)],
+                cpuShips: [new Ship(2), new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)],
+                shipIndex: 0,
+                timeline: 'init',
+                winner: ''
             }
         }
         default:

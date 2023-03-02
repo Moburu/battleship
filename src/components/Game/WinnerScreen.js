@@ -1,22 +1,31 @@
 import React, { useContext } from 'react'
 import { store } from '../../GamestateProvider'
-import { VerticalContainer } from '../styled-components/gameStyles';
+import { Button, VerticalContainer } from '../styled-components/gameStyles';
 
 const WinnerScreen = props => {
-    const { state } = useContext(store);
+    const { state, dispatch } = useContext(store);
     const winner = state.winner;
+
+    const handleClick = () => {
+        dispatch({type: "RESET_GAME", payload: ""})
+    }
+
     return (
         <VerticalContainer>
-            <h1>You
+            <h1>
             {
                 (winner === 'human') ?
-                ' win!' :
+                'Congrats! You win! Want to play again?' :
                 (winner === 'cpu') ?
-                ' lose!' :
-                ' win?'
+                'Sorry, you lose. Maybe next time!' :
+                "Oh no. I'm having an error."
             }
             </h1>
+            <Button onClick={handleClick}>
+                New Game
+            </Button>
         </VerticalContainer>
+
     )
 }
 
