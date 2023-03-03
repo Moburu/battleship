@@ -14,6 +14,12 @@ const ShipPlacement = props => {
     const [highlighted, setHighlighted] = useState([]);
 
     useEffect(() => {
+        if (shipIndex === 6) {
+            dispatch({type: 'SET_TIMELINE', payload: 'game'});
+        }
+    }, [shipIndex]);
+
+    useEffect(() => {
         placeCpuShips(cpuGameboard, cpuShips)
     }, [cpuGameboard, cpuShips])
 
@@ -49,10 +55,6 @@ const ShipPlacement = props => {
         if (board.placeShip(ship, {coords: location, axis: axis})){
             dispatch({type: 'ADD_PLAYER_SHIP', payload: [...human.ships, ship]});
             dispatch({type: 'SET_INDEX', payload: shipIndex+1});
-        }
-        // 6 is one greater than the length of ships
-        if (shipIndex === 5) {
-            dispatch({type: 'SET_TIMELINE', payload: 'game'});
         }
     }
 

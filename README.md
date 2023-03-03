@@ -37,3 +37,6 @@ Things I practiced with this project:
 2. Rapid prototyping
 3. Using styled-components, keeping my styles organized in a separate folder and importing them when needed
 4. Modularizing functions, having factories for different classes I can use and reuse as needed as well as keeping a separate "helper functions" file to share between components whenever needed.
+
+Another bug:
+When I switched shipIndex to context, it wouldn't update within the handleClick function. That is: within handleClick, I dispatched SET_INDEX, and then afterwards invoked an if statement that checked shipIndex's value. But even though the if statement executed after the dispatch - I even used setTimeout to make sure this was the case - it was reading the old value. I fixed this by moving the if statement to a useEffect with shipIndex in the dependency array, so it was guaranteed to execute as soon as the value changed.

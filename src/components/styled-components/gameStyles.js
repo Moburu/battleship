@@ -28,7 +28,7 @@ const EnemyCell = styled.div`
     width: 60px;
     height: 60px;
     transition: .1s;
-    background-color: ${({ highlighted, isHit, missed }) => isHit ? 'red' : missed ? 'green' : highlighted ? 'yellow' : 'white'};
+    background-color: ${({ highlighted, isHit, missed }) => isHit ? 'rgb(255, 128, 128, 0.9)' : missed ? 'rgb(0, 0, 0, 0.5)' : highlighted ? 'rgb(255, 255, 102)' : 'white'};
     cursor: ${({ cursor }) => cursor};
 `
 
@@ -40,7 +40,7 @@ const FriendlyCell = styled.div`
     width: 60px;
     height: 60px;
     transition: .1s;
-    background-color: ${({ highlighted, hasShip, isHit, missed }) => isHit ? 'red' : missed ? 'green' : highlighted ? 'rgb(255, 128, 128, 0.5)' : hasShip ? 'blue' : 'white'};
+    background-color: ${({ highlighted, hasShip, isHit, missed }) => isHit ? 'rgb(255, 128, 128, 0.9)' : missed ? 'rgb(0, 0, 0, 0.5)' : hasShip ? 'rgb(51, 51, 255, 0.9)' : highlighted ? 'rgb(255, 255, 102)' : 'white'};
     cursor: ${({ cursor }) => cursor};
 `
 
@@ -84,6 +84,17 @@ const ResponsiveContainer = styled.div`
     }
 `
 
+const SmallCell = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 2px solid black;
+    width: 30px;
+    height: 30px;
+    transition: .1s;
+    background-color: {({ color }) => color }
+`
+
 const VerticalContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -102,5 +113,6 @@ export {
     NameInput,
     NameSubmit,
     ResponsiveContainer,
+    SmallCell,
     VerticalContainer,
 }

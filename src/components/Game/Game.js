@@ -7,14 +7,17 @@ const Game = props => {
   const [highlighted, setHighlighted] = useState([]);
   const human = state.players[0];
   const cpu = state.players[1];
+
   const handleMouseEnter = (location, missed, isHit) => {
     if (!missed && !isHit) {
       setHighlighted(location);
     }
   }
+
   const handleMouseLeave = () => {
     setHighlighted([]);
   }
+
   const handleClick = (location) => {
     const [x, y] = location;
     if (!cpu.board[x][y].missed && !cpu.board[x][y].isHit) {
@@ -30,6 +33,7 @@ const Game = props => {
       dispatch({type: "SET_WINNER", payload: "human"});
     }
   }
+  
   return (
     <VerticalContainer>
       <h1>Click on an enemy square to fire a shot.</h1>
@@ -79,6 +83,20 @@ const Game = props => {
             </BoardGrid>
         </VerticalContainer>
       </ResponsiveContainer>
+      {/* <ResponsiveContainer>
+        <VerticalContainer>
+          <SmallCell color='rgb(51, 51, 255, 0.9)'/>
+          <span>Allied ship</span>
+        </VerticalContainer>
+        <VerticalContainer>
+          <SmallCell color='rgb(255, 128, 128, 0.9)'/>
+          <span>Hit</span>
+        </VerticalContainer>
+        <VerticalContainer>
+          <SmallCell color='rgb(0, 0, 0, 0.5)'/>
+          <span>Miss</span>
+        </VerticalContainer>
+      </ResponsiveContainer> */}
     </VerticalContainer>
   )
 }
