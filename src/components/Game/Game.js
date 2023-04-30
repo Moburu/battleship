@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { BoardGrid, EnemyCell, FriendlyCell, ResponsiveContainer, VerticalContainer } from '../styled-components/gameStyles'
+import { BoardGrid, EnemyCell, FriendlyCell, GameTitle, ResponsiveContainer, VerticalContainer } from '../styled-components/gameStyles'
 import { store } from '../../GamestateProvider';
 
 const Game = props => {
@@ -33,10 +33,10 @@ const Game = props => {
       dispatch({type: "SET_WINNER", payload: "human"});
     }
   }
-  
+
   return (
     <VerticalContainer>
-      <h1>Click on an enemy square to fire a shot.</h1>
+      <GameTitle>Click on an enemy square to fire a shot.</GameTitle>
       <ResponsiveContainer>
         <VerticalContainer>
           <h2>Player</h2>

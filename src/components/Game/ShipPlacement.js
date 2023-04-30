@@ -17,7 +17,7 @@ const ShipPlacement = props => {
         if (shipIndex === 6) {
             dispatch({type: 'SET_TIMELINE', payload: 'game'});
         }
-    }, [shipIndex]);
+    }, [shipIndex, dispatch]);
 
     useEffect(() => {
         placeCpuShips(cpuGameboard, cpuShips)

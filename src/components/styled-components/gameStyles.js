@@ -46,6 +46,7 @@ const FriendlyCell = styled.div`
 
 const GameTitle = styled.h1`
     text-align: center;
+    margin: 10px;
 `
 
 const GameText = styled.p`
@@ -84,17 +85,6 @@ const ResponsiveContainer = styled.div`
     }
 `
 
-const SmallCell = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    border: 2px solid black;
-    width: 30px;
-    height: 30px;
-    transition: .1s;
-    background-color: {({ color }) => color }
-`
-
 const VerticalContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -113,6 +103,5 @@ export {
     NameInput,
     NameSubmit,
     ResponsiveContainer,
-    SmallCell,
     VerticalContainer,
 }
